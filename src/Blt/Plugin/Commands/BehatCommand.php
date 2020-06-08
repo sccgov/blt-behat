@@ -1,6 +1,6 @@
 <?php
 
-namespace Acquia\Blt\Robo\Commands\Recipes;
+namespace Acquia\BltBehat\Blt\Plugin\Commands;
 
 use Acquia\Blt\Robo\BltTasks;
 use Acquia\Blt\Robo\Exceptions\BltException;
