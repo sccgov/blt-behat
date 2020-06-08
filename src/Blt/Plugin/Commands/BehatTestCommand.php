@@ -1,6 +1,6 @@
 <?php
 
-namespace Acquia\Blt\Robo\Commands\Tests;
+namespace Acquia\BltBehat\Blt\Plugin\Commands;
 
 use Acquia\Blt\Robo\Exceptions\BltException;
 use Acquia\Blt\Robo\Wizards\TestsWizard;
