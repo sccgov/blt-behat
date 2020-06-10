@@ -1,6 +1,5 @@
 {
   "name": "acquia/blt-behat",
-  "type":"composer-plugin",
   "description": "Behat integration for Acquia BLT",
   "license": "GPL-2.0+",
   "authors":[
