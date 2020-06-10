@@ -2,6 +2,7 @@
 
 namespace Acquia\BltBehat\Blt\Plugin\Commands;
 
+use Acquia\Blt\Robo\Commands\Tests\TestsCommandBase;
 use Acquia\Blt\Robo\Exceptions\BltException;
 use Acquia\Blt\Robo\Wizards\TestsWizard;
 use Symfony\Component\Console\Output\OutputInterface;
