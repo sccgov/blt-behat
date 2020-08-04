@@ -70,9 +70,13 @@ class BehatTestCommand extends TestsCommandBase {
     $this->createReportsDir();
 
     try {
-      $this->launchWebDriver();
+      if (!$this->getConfigValue('behat.skip_web_driver_launch')) {
+        $this->launchWebDriver();
+      }
       $this->executeBehatTests();
-      $this->killWebDriver();
+      if (!$this->getConfigValue('behat.skip_web_driver_launch')) {
+        $this->killWebDriver();
+      }
     }
     catch (\Exception $e) {
       // Kill web driver a server to prevent Pipelines from hanging after fail.
