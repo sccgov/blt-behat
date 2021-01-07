@@ -28,6 +28,7 @@ class BehatTestCommand extends TestsCommandBase {
   public function initialize() {
     parent::initialize();
     $this->behatLogDir = $this->getConfigValue('tests.reports.localDir') . "/behat";
+    $this->container->add(TestsWizard::class)->withArgument('executor');
   }
 
   /**
