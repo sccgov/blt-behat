@@ -37,6 +37,17 @@ class BehatTestCommand extends TestsCommandBase {
    * @command tests:behat:init
    */
   public function setupBehat() {
+
+    if (!$this->isBehatConfigured()) {
+        $confirm = $this->confirm("Behat configuration is not fully initialize. Run recipes:behat:init now? ", TRUE);
+        if ($confirm) {
+            $this->invokeCommands(['recipes:behat:init']);
+        }
+        else {
+            return FALSE;
+        }
+    }
+
     $defaultBehatLocalConfigFile = $this->getConfigValue('repo.root') . '/tests/behat/example.local.yml';
     $projectBehatLocalConfigFile = $this->getConfigValue('repo.root') . '/tests/behat/local.yml';
     $copy_map = [
@@ -231,5 +242,15 @@ class BehatTestCommand extends TestsCommandBase {
       }
     }
   }
+    /**
+     * Determines if Behat configuration exists in the project.
+     *
+     * @return bool
+     *   TRUE if Behat configuration exists.
+     */
+    public function isBehatConfigured() {
+        return file_exists($this->getConfigValue('repo.root') . '/tests/behat.yml')
+            && file_exists($this->getConfigValue('repo.root') . '/tests/example.local.yml');
+    }
 
 }
