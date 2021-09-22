@@ -39,7 +39,7 @@ class BehatTestCommand extends TestsCommandBase {
   public function setupBehat() {
 
     if (!$this->isBehatConfigured()) {
-        $confirm = $this->confirm("Behat configuration is not fully initialize. Run recipes:behat:init now? ", TRUE);
+        $confirm = $this->confirm("Behat configuration is not fully initialized. Run recipes:behat:init now? ", TRUE);
         if ($confirm) {
             $this->invokeCommands(['recipes:behat:init']);
         }
@@ -249,8 +249,8 @@ class BehatTestCommand extends TestsCommandBase {
      *   TRUE if Behat configuration exists.
      */
     public function isBehatConfigured() {
-        return file_exists($this->getConfigValue('repo.root') . '/tests/behat.yml')
-            && file_exists($this->getConfigValue('repo.root') . '/tests/example.local.yml');
+        return file_exists($this->getConfigValue('repo.root') . '/tests/behat/behat.yml')
+            && file_exists($this->getConfigValue('repo.root') . '/tests/behat/example.local.yml');
     }
 
 }
