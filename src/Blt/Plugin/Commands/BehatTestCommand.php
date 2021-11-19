@@ -112,9 +112,6 @@ class BehatTestCommand extends TestsCommandBase {
       /** @var \Acquia\BltBehat\Blt\Wizards\TestsWizard $tests_wizard */
       $tests_wizard = $this->getContainer()->get(TestsWizard::class);
       $tests_wizard->wizardConfigureBehat();
-      if (!$this->getInspector()->isBehatConfigured()) {
-        throw new BltException("Behat is not configured properly. Please run `blt doctor` to diagnose the issue.");
-      }
     }
 
     // Log config for debugging purposes.
@@ -165,9 +162,7 @@ class BehatTestCommand extends TestsCommandBase {
     if ($this->getConfigValue('behat.extra')) {
       $task->arg($this->getConfigValue('behat.extra'));
     }
-    $result = $task->run();
-
-    return $result;
+    return $task->run();
   }
 
   /**
