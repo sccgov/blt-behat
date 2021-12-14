@@ -24,6 +24,7 @@ In your project, require the plugin with Composer:
 Run the recipe to initialize the necessary behat files / directories
 
 `blt recipes:behat:init`
+`blt tests:behat:init`
 
 # Write Test(s)
 
