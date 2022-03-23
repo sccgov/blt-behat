@@ -7,6 +7,7 @@ use Acquia\Blt\Robo\Exceptions\BltException;
 use Acquia\BltBehat\Blt\Wizards\TestsWizard;
 use Robo\Contract\VerbosityThresholdInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use League\Container\Definition\DefinitionInterface;
 
 /**
  * Defines commands in the "tests" namespace.
@@ -28,7 +29,15 @@ class BehatTestCommand extends TestsCommandBase {
   public function initialize() {
     parent::initialize();
     $this->behatLogDir = $this->getConfigValue('tests.reports.localDir') . "/behat";
-    $this->container->add(TestsWizard::class)->withArgument('executor');
+
+    if ($this::usingLegacyContainer()) {
+      $this->container->add(TestsWizard::class)->withArgument('executor');
+    }
+    else {
+      $this->container->add(TestsWizard::class)->addArgument('executor');
+    }
+
+
   }
 
   /**
@@ -246,6 +255,16 @@ class BehatTestCommand extends TestsCommandBase {
     public function isBehatConfigured() {
         return file_exists($this->getConfigValue('repo.root') . '/tests/behat/behat.yml')
             && file_exists($this->getConfigValue('repo.root') . '/tests/behat/example.local.yml');
+    }
+
+    /**
+     * Determine if the legacy version of league/container is in use.
+     *
+     * @return bool
+     *   TRUE if using the legacy container, FALSE otherwise.
+     */
+    protected static function usingLegacyContainer() {
+      return method_exists(DefinitionInterface::class, 'withArgument');
     }
 
 }
