@@ -57,7 +57,10 @@ class BehatTestCommand extends TestsCommandBase {
         }
     }
 
-    $defaultBehatLocalConfigFile = $this->getConfigValue('repo.root') . '/tests/behat/example.local.yml';
+    // Allow setting different example file per environment or other conditions.
+    $defaultBehatLocalConfigFilePath = $this->getConfigValue('behat.example_file', '/tests/behat/example.local.yml');
+
+    $defaultBehatLocalConfigFile = $this->getConfigValue('repo.root') . $defaultBehatLocalConfigFilePath;
     $projectBehatLocalConfigFile = $this->getConfigValue('repo.root') . '/tests/behat/local.yml';
     $copy_map = [
       $defaultBehatLocalConfigFile => $projectBehatLocalConfigFile,
